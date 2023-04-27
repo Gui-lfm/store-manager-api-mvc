@@ -23,6 +23,4 @@ const getProductById = async (id) => {
   }
 };
 
-getProductById(1);
-
 module.exports = { getAll, getProductById };
