@@ -13,4 +13,6 @@ const allProducts = [
   },
 ];
 
-module.exports = { allProducts };
+const createdProduct = { id: 4, name: 'fantasia do sonic' };
+
+module.exports = { allProducts, createdProduct };

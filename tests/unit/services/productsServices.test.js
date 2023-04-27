@@ -3,7 +3,7 @@ const sinon = require("sinon");
 
 const { productsModel } = require("../../../src/models");
 const { productsService } = require("../../../src/services");
-const { allProducts } = require("./mocks/productsService.mock");
+const { allProducts, createdProduct } = require("./mocks/productsService.mock");
 
 describe("Testes da camada Service de produtos", function () {
   afterEach(function () {
@@ -34,5 +34,25 @@ describe("Testes da camada Service de produtos", function () {
 
     expect(result.type).to.be.equal(404);
     expect(result.message).to.equal("Product not found");
+  });
+
+  it("Retorna um objeto com o produto criado e type null", async function () {
+    sinon.stub(productsModel, "registerProduct").resolves(createdProduct);
+
+    const result = await productsService.postProduct(createdProduct.name);
+
+    expect(result.type).to.be.equal(null);
+    expect(result.message).to.be.deep.equal(createdProduct);
+  });
+
+  it("Retorna uma mensagem de erro caso o campo name seja inválido", async function () {
+    sinon.stub(productsModel, "registerProduct").resolves(undefined);
+
+    const result = await productsService.postProduct("abc");
+
+    expect(result.type).to.be.equal(422);
+    expect(result.message).to.equal(
+      '"name" length must be at least 5 characters long'
+    );
   });
 });
