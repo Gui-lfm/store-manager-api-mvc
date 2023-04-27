@@ -13,4 +13,9 @@ const productsMock = [
   },
 ];
 
-module.exports = { productsMock };
+const newProduct = {
+  id: 4,
+  name: "fantasia do sonic",
+};
+
+module.exports = { productsMock, newProduct };
