@@ -1,5 +1,6 @@
 const express = require('express');
 const { productsController } = require('./controllers');
+const verifyName = require('./middlewares/verifyName');
 
 const app = express();
 
@@ -13,6 +14,6 @@ app.get('/products', productsController.getAll);
 
 app.get('/products/:id', productsController.getById);
 
-app.post('/products', productsController.postProduct);
+app.post('/products', verifyName, productsController.postProduct);
 
 module.exports = app;
