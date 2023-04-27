@@ -13,6 +13,9 @@ const products = [
   },
 ];
 
+const newProduct = "fantasia do sonic";
+
 module.exports = {
   products,
-}
+  newProduct,
+};

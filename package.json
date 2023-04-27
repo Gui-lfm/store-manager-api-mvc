@@ -14,6 +14,7 @@
     "dev": "nodemon --ignore coverage --inspect=0.0.0.0:9229 src/server.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx",
     "migration": "node -e \"require('./__tests__/_utils').runMigration()\"",
+    "mocha": "mocha tests/unit/**/*.js --exit",
     "seed": "node -e \"require('./__tests__/_utils').runSeed()\""
   },
   "repository": {
