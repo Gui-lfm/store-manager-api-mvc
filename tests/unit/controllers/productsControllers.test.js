@@ -10,6 +10,9 @@ const { productsController } = require("../../../src/controllers");
 const { productsMock } = require("./mocks/productsController.mock");
 
 describe("Testes da camada controller de produtos", function () {
+  afterEach(function () {
+    sinon.restore();
+  });
   it("Deve retornar o status 200 e a lista", async function () {
     const res = {};
     const req = {};
