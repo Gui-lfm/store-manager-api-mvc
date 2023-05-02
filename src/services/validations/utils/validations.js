@@ -1,5 +1,5 @@
 const { quantitySchema } = require('../schemas');
-const { productsModel } = require('../../../models');
+const { productsModel, salesModel } = require('../../../models');
 
 const isQuantityValid = (sales) => {
   const quantitys = sales.map(({ quantity }) => quantity);
@@ -29,7 +29,14 @@ const ProductExists = async (sales) => {
   return true;
 };
 
+const saleExists = async (id) => { 
+  const validQuery = await salesModel.doesSaleExist(id);
+
+  return validQuery;
+};
+
 module.exports = {
   isQuantityValid,
   ProductExists,
+  saleExists,
 };

@@ -23,12 +23,46 @@ const registerProductSale = async (sales) => {
   return { id: currentSaleId, itemsSold: sales };
 };
 
-const getProductSales = async () => {
-  const result = await connection.execute(
-    'SELECT * FROM StoreManager.sales_products',
-  );
+const getAll = async () => { 
+  const [result] = await connection.execute(`
+    SELECT 
+      a.id AS saleId,
+      a.date,
+      b.product_id AS productId,
+      b.quantity
+    FROM 
+      StoreManager.sales a
+          INNER JOIN 
+      StoreManager.sales_products b ON a.id = b.sale_id
+    ORDER BY saleId , productId;`);
+  
+  return result;
+};
+
+const getById = async (id) => { 
+  const [result] = await connection.execute(`
+  SELECT
+    a.date,
+    b.product_id AS productId,
+    b.quantity
+  FROM
+    StoreManager.sales a
+        INNER JOIN
+    StoreManager.sales_products b ON a.id = b.sale_id
+  WHERE
+    a.id = ?
+  ORDER BY productId;`, [id]);
 
   return result;
 };
 
-module.exports = { registerSales, registerProductSale, getProductSales };
+const doesSaleExist = async (id) => {
+  const [result] = await connection.execute(
+    `SELECT * FROM StoreManager.sales
+     WHERE id=?`, [id],
+  );
+
+  return result.length > 0;
+};
+
+module.exports = { registerSales, registerProductSale, getAll, getById, doesSaleExist };

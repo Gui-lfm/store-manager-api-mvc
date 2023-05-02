@@ -16,6 +16,10 @@ app.get('/products/:id', productsController.getById);
 
 app.post('/products', verifyName, productsController.postProduct);
 
+app.get('/sales', salesController.getSales);
+
+app.get('/sales/:id', salesController.getById);
+
 app.post('/sales', verifyId, verifyQuantity, salesController.postSale);
 
 module.exports = app;

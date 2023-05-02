@@ -2,6 +2,7 @@ const { salesModel } = require('../models');
 const {
   isQuantityValid,
   ProductExists,
+  saleExists,
 } = require('./validations/utils/validations');
 
 const postSale = async (sales) => {
@@ -25,4 +26,17 @@ const postSale = async (sales) => {
   return { type: null, message: newSale };
 };
 
-module.exports = { postSale };
+const getSales = async () => {
+  const sales = await salesModel.getAll();
+  return { type: null, message: sales };
+};
+
+const getSaleById = async (id) => {
+  const result = await saleExists(id);
+
+  if (!result) return { type: 404, message: 'Sale not found' };
+
+  const sale = await salesModel.getById(id);
+  return { type: null, message: sale };
+};
+module.exports = { postSale, getSales, getSaleById };
