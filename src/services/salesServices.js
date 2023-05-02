@@ -5,8 +5,6 @@ const {
 } = require('./validations/utils/validations');
 
 const postSale = async (sales) => {
-  const newSale = await salesModel.registerProductSale(sales);
-
   if (!isQuantityValid(sales)) {
     return {
       type: 422,
@@ -14,7 +12,6 @@ const postSale = async (sales) => {
     };
   }
   const idExists = await ProductExists(sales);
-  console.log('salesService', idExists);
 
   if (!idExists) {
     return {
@@ -22,6 +19,8 @@ const postSale = async (sales) => {
       message: 'Product not found',
     };
   }
+
+  const newSale = await salesModel.registerProductSale(sales);
 
   return { type: null, message: newSale };
 };

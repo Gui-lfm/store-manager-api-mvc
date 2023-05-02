@@ -11,14 +11,24 @@ const registerSales = async () => {
 const registerProductSale = async (sales) => {
   const currentSaleId = await registerSales();
 
-  sales.map(async (sale) =>
+  const promise = sales.map(async (sale) =>
     connection.execute(
       `INSERT INTO StoreManager.sales_products 
             (sale_id, product_id, quantity) VALUES (?, ?, ?);`,
       [currentSaleId, sale.productId, sale.quantity],
     ));
 
+  await Promise.all(promise);
+
   return { id: currentSaleId, itemsSold: sales };
 };
 
-module.exports = { registerSales, registerProductSale };
+const getProductSales = async () => {
+  const result = await connection.execute(
+    'SELECT * FROM StoreManager.sales_products',
+  );
+
+  return result;
+};
+
+module.exports = { registerSales, registerProductSale, getProductSales };
