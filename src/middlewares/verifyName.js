@@ -1,4 +1,4 @@
-const verifyName = (req, res, next) => {
+module.exports = (req, res, next) => {
   const { name } = req.body;
 
   if (!name) {
@@ -7,5 +7,3 @@ const verifyName = (req, res, next) => {
 
   next();
 };
-
-module.exports = verifyName;

@@ -8,9 +8,14 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2023-04-26T21:18:02.523Z",
-    "modified": "2023-04-26T23:13:34.338Z",
+    "modified": "2023-05-02T21:11:13.254Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"ProdutoX\"\n}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -22,12 +27,31 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-04-27T18:55:42.760Z",
-    "modified": "2023-04-27T20:52:54.910Z",
+    "modified": "2023-04-28T23:17:10.811Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"produto de teste\"\n}",
+      "raw": "{\n    \"name\": \"pro\"\n}\n",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "6031b8df-d10e-4c6d-a62e-cf3fd03b8a7a",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/sales/",
+    "url": "http://localhost:3001/sales/",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-28T20:05:53.429Z",
+    "modified": "2023-05-02T21:08:59.230Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 5,\n    \"quantity\": 6\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 3\n  }\n]",
       "form": []
     },
     "tests": []

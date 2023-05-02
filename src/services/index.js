@@ -1,3 +1,4 @@
 const productsService = require('./productsService');
+const salesService = require('./salesServices');
 
-module.exports = { productsService };
+module.exports = { productsService, salesService };

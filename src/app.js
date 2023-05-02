@@ -1,6 +1,6 @@
 const express = require('express');
-const { productsController } = require('./controllers');
-const verifyName = require('./middlewares/verifyName');
+const { productsController, salesController } = require('./controllers');
+const { verifyName, verifyId, verifyQuantity } = require('./middlewares');
 
 const app = express();
 
@@ -15,5 +15,7 @@ app.get('/products', productsController.getAll);
 app.get('/products/:id', productsController.getById);
 
 app.post('/products', verifyName, productsController.postProduct);
+
+app.post('/sales', verifyId, verifyQuantity, salesController.postSale);
 
 module.exports = app;

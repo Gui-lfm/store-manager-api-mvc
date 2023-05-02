@@ -1,5 +1,5 @@
 const { productsModel } = require('../models');
-const nameSchema = require('./validations/schemas');
+const { nameSchema } = require('./validations/schemas');
 
 const getAllProducts = async () => {
   const products = await productsModel.getAll();
@@ -16,11 +16,11 @@ const postProduct = async (name) => {
   const { error } = nameSchema.validate(name);
 
   if (error) {
- return {
+    return {
       type: 422,
       message: '"name" length must be at least 5 characters long',
-    }; 
-}
+    };
+  }
 
   const newProduct = await productsModel.registerProduct(name);
 
