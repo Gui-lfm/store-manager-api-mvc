@@ -5,7 +5,7 @@ const getAll = async (_req, res) => {
   return res.status(200).json(products.message);
 };
 
-const getById = async (req, res) => { 
+const getById = async (req, res) => {
   const { id } = req.params;
 
   const product = await productsService.getProductById(id);
@@ -21,4 +21,13 @@ const postProduct = async (req, res) => {
   return res.status(201).json(newProduct.message);
 };
 
-module.exports = { getAll, getById, postProduct };
+const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  const response = await productsService.updateProduct(name, id);
+
+  if (response.type) return res.status(response.type).json({ message: response.message });
+  return res.status(200).json(response.message);
+};
+
+module.exports = { getAll, getById, postProduct, updateProduct };

@@ -35,4 +35,28 @@ const registerProduct = async (name) => {
   }
 };
 
-module.exports = { getAll, getProductById, registerProduct };
+const updateById = async (newData, id) => {
+  await connection.execute(
+    'UPDATE StoreManager.products SET name = ? WHERE id = ?;',
+    [newData, id],
+  );
+  return { id, name: newData };
+};
+
+const doesProductExist = async (id) => {
+  const [result] = await connection.execute(
+    `SELECT * FROM StoreManager.products
+     WHERE id=?`,
+    [id],
+  );
+
+  return result.length > 0;
+};
+
+module.exports = {
+  getAll,
+  getProductById,
+  registerProduct,
+  updateById,
+  doesProductExist,
+};

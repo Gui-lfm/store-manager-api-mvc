@@ -1,7 +1,7 @@
 const { salesModel } = require('../models');
 const {
   isQuantityValid,
-  ProductExists,
+  productsExists,
   saleExists,
 } = require('./validations/utils/validations');
 
@@ -12,7 +12,7 @@ const postSale = async (sales) => {
       message: '"quantity" must be greater than or equal to 1',
     };
   }
-  const idExists = await ProductExists(sales);
+  const idExists = await productsExists(sales);
 
   if (!idExists) {
     return {

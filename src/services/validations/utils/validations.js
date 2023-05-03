@@ -15,7 +15,7 @@ const isQuantityValid = (sales) => {
   return true;
 };
 
-const ProductExists = async (sales) => {
+const productsExists = async (sales) => {
   const salesIds = sales.map(({ productId }) => productId);
 
   const products = await productsModel.getAll();
@@ -35,8 +35,10 @@ const saleExists = async (id) => {
   return validQuery;
 };
 
-module.exports = {
-  isQuantityValid,
-  ProductExists,
-  saleExists,
-};
+const productExists = async (id) => { 
+  const valid = await productsModel.doesProductExist(id);
+
+  return valid;
+}; 
+
+module.exports = { isQuantityValid, productsExists, saleExists, productExists };

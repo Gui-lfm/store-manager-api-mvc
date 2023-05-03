@@ -14,6 +14,8 @@ app.get('/products', productsController.getAll);
 
 app.get('/products/:id', productsController.getById);
 
+app.put('/products/:id', verifyName, productsController.updateProduct);
+
 app.post('/products', verifyName, productsController.postProduct);
 
 app.get('/sales', salesController.getSales);
