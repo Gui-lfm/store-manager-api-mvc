@@ -32,11 +32,21 @@ const getSales = async () => {
 };
 
 const getSaleById = async (id) => {
-  const result = await saleExists(id);
+  const exist = await saleExists(id);
 
-  if (!result) return { type: 404, message: 'Sale not found' };
+  if (!exist) return { type: 404, message: 'Sale not found' };
 
   const sale = await salesModel.getById(id);
   return { type: null, message: sale };
 };
-module.exports = { postSale, getSales, getSaleById };
+
+const deleteSale = async (id) => { 
+  const exist = await saleExists(id);
+
+  if (!exist) return { type: 404, message: 'Sale not found' };
+
+  await salesModel.deleteSale(id);
+
+  return { type: null, message: 'deleted' };
+};
+module.exports = { postSale, getSales, getSaleById, deleteSale };

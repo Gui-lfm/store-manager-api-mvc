@@ -65,4 +65,17 @@ const doesSaleExist = async (id) => {
   return result.length > 0;
 };
 
-module.exports = { registerSales, registerProductSale, getAll, getById, doesSaleExist };
+const deleteSale = async (id) => { 
+  await connection.execute(
+    'DELETE FROM StoreManager.sales WHERE id = ?', [id],
+  );
+};
+
+module.exports = {
+  registerSales,
+  registerProductSale,
+  getAll,
+  getById,
+  doesSaleExist,
+  deleteSale,
+};
